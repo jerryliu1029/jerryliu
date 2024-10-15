@@ -112,7 +112,6 @@ li {
   padding: 20px;
   display: flex;
   flex-direction: row;
-  border: 1px solid grey; /* DELETE LETER */
 }
 
 .menu {
@@ -120,7 +119,6 @@ li {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  border: 1px solid red; /* DELETE LETER */
 }
 
 .menu-item {
@@ -184,7 +182,6 @@ li {
   display: flex;
   flex-direction: column;
   justify-content: flex-end; /* Align items to the bottom */
-  border: 1px solid pink; /* DELETE LATER */
 }
 
 .about-hidden {
@@ -207,7 +204,6 @@ li {
 }
 
 .text-block {
-  border: 1px teal solid; /* DELETE LATER */
   height: fit-content;
   padding-bottom: 30px;
 }
