@@ -209,6 +209,7 @@ li {
 }
 
 /* Custom cursor stuff */
+
 .custom-cursor {
   position: absolute;
   width: 32px;
@@ -232,10 +233,17 @@ li {
   transition: clip-path 0.5s ease;
 }
 
+/* Touscreen modifications */
+
 body.touchscreen #customCursor {
   display: none; /* Hide custom cursor on touchscreen devices */
 }
 
 body.no-touchscreen #customCursor {
   display: block; /* Show custom cursor on non-touchscreen devices */
+}
+
+/* Disable hover effect on touchscreen devices */
+body.touchscreen a:hover {
+  filter: none; /* Remove blur effect */
 }
