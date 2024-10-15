@@ -84,4 +84,9 @@ document.getElementById("aboutMe").addEventListener("click", function (event) {
   for (let i = 0; i < menuItems.length; i++) {
     menuItems[i].classList.toggle("menu-item-shifted");
   }
+
+  const otherLinks = document.querySelectorAll(".menu-item:not(#aboutMe)");
+  otherLinks.forEach((link) => {
+    link.classList.toggle("disabled-link");
+  });
 });

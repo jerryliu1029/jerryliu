@@ -35,7 +35,6 @@
 :root {
   --off-white: #f8f8f8;
   --off-black: #020202;
-  --dark-grey: #0f0f0f;
   --light-blue: #68e3ff;
 }
 
@@ -143,7 +142,6 @@ li {
 .disabled-link {
   pointer-events: none;
   opacity: 0.05;
-  /* color: var(--dark-grey); */
 }
 
 /* Defining states for the "socials" section */
@@ -247,3 +245,15 @@ body.no-touchscreen #customCursor {
 body.touchscreen a:hover {
   filter: none; /* Remove blur effect */
 }
+
+/*
+
+width x height
+ipad portrait 850 x 1056; 820 x 1073
+ipad landscape 1180 x 696; 1180 x 713
+
+REGULAR
+AboutOverlay --> 1120w and below
+SocialsOverlay --> 
+
+*/
