@@ -90,3 +90,60 @@ document.getElementById("aboutMe").addEventListener("click", function (event) {
     link.classList.toggle("disabled-link");
   });
 });
+
+// Hide socials-icons when clicking outside
+document.addEventListener("click", function (event) {
+  const socialsIcons = document.getElementById("socials-icons");
+  const socialsMenuItem = document.getElementById("socials");
+
+  if (
+    socialsIcons &&
+    !socialsIcons.contains(event.target) &&
+    !socialsMenuItem.contains(event.target)
+  ) {
+    if (socialsIcons.classList.contains("socials-visible")) {
+      socialsIcons.classList.remove("socials-visible");
+      document
+        .getElementById("container")
+        .classList.remove("container-socials");
+
+      const menuItems = document.getElementsByClassName("menu-item");
+      for (let i = 0; i < menuItems.length; i++) {
+        menuItems[i].classList.remove("menu-item-shifted");
+      }
+
+      const otherLinks = document.querySelectorAll(".menu-item:not(#socials)");
+      otherLinks.forEach((link) => {
+        link.classList.remove("disabled-link");
+      });
+    }
+  }
+});
+
+// Hide about-text when clicking outside
+document.addEventListener("click", function (event) {
+  const textBlock = document.getElementById("text-block");
+  const aboutText = document.getElementById("about-text");
+  const aboutMeMenuItem = document.getElementById("aboutMe");
+
+  if (
+    aboutText &&
+    !textBlock.contains(event.target) &&
+    !aboutMeMenuItem.contains(event.target)
+  ) {
+    if (aboutText.classList.contains("about-visible")) {
+      aboutText.classList.remove("about-visible");
+      document.getElementById("container").classList.remove("container-about");
+
+      const menuItems = document.getElementsByClassName("menu-item");
+      for (let i = 0; i < menuItems.length; i++) {
+        menuItems[i].classList.remove("menu-item-shifted");
+      }
+
+      const otherLinks = document.querySelectorAll(".menu-item:not(#aboutMe)");
+      otherLinks.forEach((link) => {
+        link.classList.remove("disabled-link");
+      });
+    }
+  }
+});
