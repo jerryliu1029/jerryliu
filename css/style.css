@@ -231,3 +231,11 @@ li {
   clip-path: inset(4px 14px 4px 14px round 0%);
   transition: clip-path 0.5s ease;
 }
+
+body.touchscreen #customCursor {
+  display: none; /* Hide custom cursor on touchscreen devices */
+}
+
+body.no-touchscreen #customCursor {
+  display: block; /* Show custom cursor on non-touchscreen devices */
+}
