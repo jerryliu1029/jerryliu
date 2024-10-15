@@ -8,13 +8,13 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   // Custom cursor for text-block
-  const aboutText = document.getElementById("text-block");
+  const textBlock = document.getElementById("text-block");
 
-  aboutText.addEventListener("mouseenter", function () {
+  textBlock.addEventListener("mouseenter", function () {
     customCursor.classList.add("rect");
   });
 
-  aboutText.addEventListener("mouseleave", function () {
+  textBlock.addEventListener("mouseleave", function () {
     customCursor.classList.remove("rect");
   });
 
@@ -88,6 +88,34 @@ document.addEventListener("click", function (event) {
       }
 
       const otherLinks = document.querySelectorAll(".menu-item:not(#socials)");
+      otherLinks.forEach((link) => {
+        link.classList.remove("disabled-link");
+      });
+    }
+  }
+});
+
+// Hide about-text when clicking outside
+document.addEventListener("click", function (event) {
+  const textBlock = document.getElementById("text-block");
+  const aboutText = document.getElementById("about-text");
+  const aboutMeMenuItem = document.getElementById("aboutMe");
+
+  if (
+    aboutText &&
+    !textBlock.contains(event.target) &&
+    !aboutMeMenuItem.contains(event.target)
+  ) {
+    if (aboutText.classList.contains("about-visible")) {
+      aboutText.classList.remove("about-visible");
+      document.getElementById("container").classList.remove("container-about");
+
+      const menuItems = document.getElementsByClassName("menu-item");
+      for (let i = 0; i < menuItems.length; i++) {
+        menuItems[i].classList.remove("menu-item-shifted");
+      }
+
+      const otherLinks = document.querySelectorAll(".menu-item:not(#aboutMe)");
       otherLinks.forEach((link) => {
         link.classList.remove("disabled-link");
       });
