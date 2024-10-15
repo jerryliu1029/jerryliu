@@ -101,10 +101,37 @@ document.addEventListener("click", function (event) {
   const socialsMenuItem = document.getElementById("socials");
 
   if (
+    window.innerWidth > 750 && // Check if viewport width is not below 750px
     socialsIcons &&
     !socialsIcons.contains(event.target) &&
     !socialsMenuItem.contains(event.target)
   ) {
+    if (socialsIcons.classList.contains("socials-visible")) {
+      socialsIcons.classList.remove("socials-visible");
+      document
+        .getElementById("container")
+        .classList.remove("container-socials");
+      document.getElementById("menu").classList.remove("menu-socials");
+      document.getElementById("arrow").classList.remove("arrow-socials");
+
+      const menuItems = document.getElementsByClassName("menu-item");
+      for (let i = 0; i < menuItems.length; i++) {
+        menuItems[i].classList.remove("menu-item-shifted-socials");
+      }
+
+      const otherLinks = document.querySelectorAll(".menu-item:not(#socials)");
+      otherLinks.forEach((link) => {
+        link.classList.remove("disabled-link");
+      });
+    }
+  }
+});
+
+// Hide socials-icons when clicking arrow
+document.getElementById("arrow").addEventListener("click", function (event) {
+  const socialsIcons = document.getElementById("socials-icons");
+
+  if (window.innerWidth <= 750 && socialsIcons) {
     if (socialsIcons.classList.contains("socials-visible")) {
       socialsIcons.classList.remove("socials-visible");
       document
@@ -133,10 +160,36 @@ document.addEventListener("click", function (event) {
   const aboutMeMenuItem = document.getElementById("aboutMe");
 
   if (
+    window.innerWidth > 1120 && // Check if viewport width is not below 1120px
     aboutText &&
     !textBlock.contains(event.target) &&
     !aboutMeMenuItem.contains(event.target)
   ) {
+    if (aboutText.classList.contains("about-visible")) {
+      aboutText.classList.remove("about-visible");
+      document.getElementById("container").classList.remove("container-about");
+      document.getElementById("menu").classList.remove("menu-about");
+      document.getElementById("arrow").classList.remove("arrow-about");
+
+      const menuItems = document.getElementsByClassName("menu-item");
+      for (let i = 0; i < menuItems.length; i++) {
+        menuItems[i].classList.remove("menu-item-shifted-about");
+      }
+
+      const otherLinks = document.querySelectorAll(".menu-item:not(#aboutMe)");
+      otherLinks.forEach((link) => {
+        link.classList.remove("disabled-link");
+      });
+    }
+  }
+});
+
+// Hide about-text when clicking arrow
+document.getElementById("arrow").addEventListener("click", function (event) {
+  const textBlock = document.getElementById("text-block");
+  const aboutText = document.getElementById("about-text");
+
+  if (window.innerWidth <= 1120 && aboutText) {
     if (aboutText.classList.contains("about-visible")) {
       aboutText.classList.remove("about-visible");
       document.getElementById("container").classList.remove("container-about");
