@@ -1,0 +1,237 @@
+/* Gambarino font */
+@import url("gambarino.css");
+
+/* Inter font */
+:root {
+  font-family: Inter, sans-serif;
+  font-feature-settings: "liga" 1, "calt" 1;
+  /* fix for Chrome */
+}
+
+@supports (font-variation-settings: normal) {
+  :root {
+    font-family: InterVariable, sans-serif;
+  }
+}
+
+/* Custom page load fade in effect */
+@keyframes blurFadeIn {
+  0% {
+    opacity: 0;
+    filter: blur(10px);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
+.blur-fade-in {
+  animation: blurFadeIn 3s ease;
+}
+
+/* Global things (mostly) */
+
+:root {
+  --off-white: #f8f8f8;
+  --off-black: #020202;
+  --dark-grey: #0f0f0f;
+  --light-blue: #68e3ff;
+}
+
+::selection {
+  background-color: var(
+    --light-blue
+  ); /* Change this to your desired highlight color */
+  color: black; /* Optional: Change the text color */
+}
+
+/* Define for all elements */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Gambarino-Regular;
+  font-size: 75px;
+  line-height: 130%;
+  color: var(--off-white);
+  background: var(--off-black);
+  display: flex; /* Use flexbox */
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  height: 100vh; /* Full height of the viewport */
+  width: 100vw;
+  margin: 0; /* Remove default margin */
+  padding: 0; /* Remove default padding */
+  overflow: hidden;
+  cursor: none; /* Hide default cursor */
+}
+
+/* Paragraph */
+p {
+  font-family: Inter, sans-serif;
+  font-size: 18px;
+  font-weight: 200;
+  line-height: 130%;
+}
+
+/* Links (anchor) */
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: filter 0.5s ease-out; /* Add transition for filter change */
+}
+
+a:hover {
+  filter: blur(2px); /* Apply blur effect on hover */
+  cursor: none; /* Hide default cursor on hover */
+}
+
+/* Unordered lists */
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* List items */
+li {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Utility Classes */
+
+.container {
+  width: auto;
+  height: 450px;
+  padding: 20px;
+  display: flex;
+  flex-direction: row;
+  border: 1px solid grey; /* DELETE LETER */
+}
+
+.menu {
+  width: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  border: 1px solid red; /* DELETE LETER */
+}
+
+.menu-item {
+  position: relative;
+  right: 50%;
+  transform: translateX(50%);
+  transition: all 1s ease 0.1s;
+}
+
+.icon {
+  scale: 0.85;
+}
+
+/* Defining states for the "socials" and "about me" sections */
+.menu-item-shifted {
+  right: 0%;
+  transform: translateX(0%);
+  margin-right: 50px;
+  transition: all 1s ease 0s;
+}
+
+.disabled-link {
+  pointer-events: none;
+  opacity: 0.05;
+  /* color: var(--dark-grey); */
+}
+
+/* Defining states for the "socials" section */
+.container-socials {
+  align-items: stretch;
+}
+
+.socials-hidden {
+  visibility: hidden;
+  opacity: 0;
+  filter: blur(10px);
+  width: 0;
+  transition: visibility 1s ease-in 0.5s, opacity 0.5s ease-in,
+    filter 0.5s ease-in, width 0.5s ease-in 0.5s, margin-left 0.5s linear;
+}
+
+.socials-visible {
+  visibility: visible;
+  opacity: 1;
+  filter: blur(0);
+  width: 70px;
+  margin-left: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: visibility 1s ease, opacity 0.5s ease 0.5s, filter 0.5s ease 0.5s,
+    width 0.5s ease, margin-left 0.5s ease;
+}
+
+/* Defining states for the "about me" section */
+.container-about {
+  align-items: stretch;
+}
+
+#about-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end; /* Align items to the bottom */
+  border: 1px solid pink; /* DELETE LATER */
+}
+
+.about-hidden {
+  visibility: hidden;
+  opacity: 0;
+  filter: blur(10px);
+  width: 0;
+  transition: visibility 1s ease-in 0.5s, opacity 0.5s ease-in,
+    filter 0.5s ease-in, width 0.5s ease-in 0.5s, margin-left 0.5s linear;
+}
+
+.about-visible {
+  visibility: visible;
+  opacity: 1;
+  filter: blur(0);
+  width: 500px;
+  margin-left: 50px;
+  transition: visibility 1s ease, opacity 0.5s ease 0.5s, filter 0.5s ease 0.5s,
+    width 0.5s ease, margin-left 0.5s ease;
+}
+
+.text-block {
+  border: 1px teal solid; /* DELETE LATER */
+  height: fit-content;
+  padding-bottom: 30px;
+}
+
+/* Custom cursor stuff */
+.custom-cursor {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  background: white;
+  clip-path: inset(15% round 50%);
+  pointer-events: none;
+  mix-blend-mode: difference; /* Invert colors */
+  z-index: 1000;
+  transform: translate(-50%, -50%);
+  transition: clip-path 0.5s ease;
+}
+
+.custom-cursor.link-hover {
+  clip-path: inset(0% round 50%);
+  transition: clip-path 0.5s ease;
+}
+
+.custom-cursor.rect {
+  clip-path: inset(4px 14px 4px 14px round 0%);
+  transition: clip-path 0.5s ease;
+}
