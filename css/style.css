@@ -105,37 +105,95 @@ li {
 
 /* Utility Classes */
 
+.container-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-items: center;
+}
+
 .container {
   width: auto;
   height: 450px;
   padding: 20px;
   display: flex;
   flex-direction: row;
+  border: 1px solid green;
 }
 
 .menu {
-  width: auto;
+  width: 411.31px;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+  border: 1px solid pink;
+  transition: all 0.5s ease 0s;
 }
 
 .menu-item {
   position: relative;
   right: 50%;
   transform: translateX(50%);
+  margin-right: 0px;
+  visibility: visible;
+  opacity: 1;
+  filter: blur (0px);
   transition: all 1s ease 0.1s;
+  border: 1px solid blue;
 }
 
 .icon {
   scale: 0.85;
 }
 
+.arrow {
+  visibility: hidden;
+  opacity: 0;
+  filter: blur (10px);
+  transition: all 1s ease 0s;
+}
+
 /* Defining states for the "socials" and "about me" sections */
-.menu-item-shifted {
+
+.arrow-socials {
+  visibility: hidden;
+  /* just a blank here, placeholder for responsive elements later */
+}
+
+.arrow-about {
+  visibility: hidden;
+  /* just a blank here, placeholder for responsive elements later */
+}
+
+.menu-socials {
+  /* just a blank here, placeholder for responsive elements later */
+  display: flex;
+}
+
+.menu-about {
+  /* just a blank here, placeholder for responsive elements later */
+  display: flex;
+}
+
+/* same as the menu-item-shifted-about normally but needs to be separate for responsive design */
+.menu-item-shifted-socials {
   right: 0%;
   transform: translateX(0%);
   margin-right: 50px;
+  visibility: visible;
+  opacity: 1;
+  filter: blur (0px);
+  transition: all 1s ease 0s;
+}
+
+/* same as the menu-item-shifted-socials normally but needs to be separate for responsive design */
+.menu-item-shifted-about {
+  right: 0%;
+  transform: translateX(0%);
+  margin-right: 50px;
+  visibility: visible;
+  opacity: 1;
+  filter: blur (0px);
   transition: all 1s ease 0s;
 }
 
@@ -145,6 +203,7 @@ li {
 }
 
 /* Defining states for the "socials" section */
+
 .container-socials {
   align-items: stretch;
 }
@@ -172,6 +231,7 @@ li {
 }
 
 /* Defining states for the "about me" section */
+
 .container-about {
   align-items: stretch;
 }
@@ -180,6 +240,7 @@ li {
   display: flex;
   flex-direction: column;
   justify-content: flex-end; /* Align items to the bottom */
+  border: 1px solid teal;
 }
 
 .about-hidden {
@@ -252,9 +313,87 @@ width x height
 ipad portrait 850 x 1056; 820 x 1073
 ipad landscape 1180 x 696; 1180 x 713
 
-REGULAR
-AboutOverlay --> 1120w and below
-SocialsOverlay --> 750w and less
-Scale text --> 600w or 650h and less
-
 */
+
+/* Media queries */
+
+/* Changing the AboutMe to an overlay */
+@media (max-width: 1120px) {
+  /* body {
+    background-color: red;
+  } */
+
+  .menu-about {
+    width: 0px;
+    transition: all 0.5s ease 0.5s;
+  }
+
+  .menu-item-shifted-about {
+    /* override the default */
+    right: 0%;
+    transform: translateX(0%);
+    margin-right: 0px;
+    /* new additions */
+    visibility: hidden;
+    opacity: 0;
+    filter: blur(10px);
+    transition: all 1s ease 0s;
+  }
+
+  .about-visible {
+    margin-left: 0px;
+  }
+
+  #emojis {
+    text-align: center;
+  }
+
+  .arrow-about {
+    visibility: visible;
+    opacity: 1;
+    filter: blur(0);
+    transition: all 1s ease 0.5s;
+  }
+}
+
+/* Changing the Socials to an overlay */
+@media (max-width: 750px) {
+  /* body {
+    background-color: yellow;
+  } */
+
+  .menu-socials {
+    width: 0px;
+    transition: all 0.5s ease 0.5s;
+  }
+
+  .menu-item-shifted-socials {
+    /* override the default */
+    right: 0%;
+    transform: translateX(0%);
+    margin-right: 0px;
+    /* new additions */
+    visibility: hidden;
+    opacity: 0;
+    filter: blur(10px);
+    transition: all 1s ease 0s;
+  }
+
+  .socials-visible {
+    margin-left: 0px;
+  }
+
+  .arrow-socials {
+    visibility: visible;
+    opacity: 1;
+    filter: blur(0);
+    transition: all 1s ease 0.5s;
+  }
+}
+
+/* Scaling text INCOMPLETE*/
+@media (max-width: 600px) or (max-height: 650px) {
+  body {
+    background-color: green; /* TO BE DELETED */
+  }
+}

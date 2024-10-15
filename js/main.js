@@ -62,10 +62,12 @@ document.getElementById("socials").addEventListener("click", function (event) {
   event.preventDefault(); // Prevent the default link behavior
   document.getElementById("socials-icons").classList.toggle("socials-visible");
   document.getElementById("container").classList.toggle("container-socials");
+  document.getElementById("menu").classList.toggle("menu-socials");
+  document.getElementById("arrow").classList.toggle("arrow-socials");
 
   const menuItems = document.getElementsByClassName("menu-item");
   for (let i = 0; i < menuItems.length; i++) {
-    menuItems[i].classList.toggle("menu-item-shifted");
+    menuItems[i].classList.toggle("menu-item-shifted-socials");
   }
 
   const otherLinks = document.querySelectorAll(".menu-item:not(#socials)");
@@ -79,10 +81,12 @@ document.getElementById("aboutMe").addEventListener("click", function (event) {
   event.preventDefault(); // Prevent the default link behavior
   document.getElementById("about-text").classList.toggle("about-visible");
   document.getElementById("container").classList.toggle("container-about");
+  document.getElementById("menu").classList.toggle("menu-about");
+  document.getElementById("arrow").classList.toggle("arrow-about");
 
   const menuItems = document.getElementsByClassName("menu-item");
   for (let i = 0; i < menuItems.length; i++) {
-    menuItems[i].classList.toggle("menu-item-shifted");
+    menuItems[i].classList.toggle("menu-item-shifted-about");
   }
 
   const otherLinks = document.querySelectorAll(".menu-item:not(#aboutMe)");
@@ -106,10 +110,12 @@ document.addEventListener("click", function (event) {
       document
         .getElementById("container")
         .classList.remove("container-socials");
+      document.getElementById("menu").classList.remove("menu-socials");
+      document.getElementById("arrow").classList.remove("arrow-socials");
 
       const menuItems = document.getElementsByClassName("menu-item");
       for (let i = 0; i < menuItems.length; i++) {
-        menuItems[i].classList.remove("menu-item-shifted");
+        menuItems[i].classList.remove("menu-item-shifted-socials");
       }
 
       const otherLinks = document.querySelectorAll(".menu-item:not(#socials)");
@@ -134,10 +140,12 @@ document.addEventListener("click", function (event) {
     if (aboutText.classList.contains("about-visible")) {
       aboutText.classList.remove("about-visible");
       document.getElementById("container").classList.remove("container-about");
+      document.getElementById("menu").classList.remove("menu-about");
+      document.getElementById("arrow").classList.remove("arrow-about");
 
       const menuItems = document.getElementsByClassName("menu-item");
       for (let i = 0; i < menuItems.length; i++) {
-        menuItems[i].classList.remove("menu-item-shifted");
+        menuItems[i].classList.remove("menu-item-shifted-about");
       }
 
       const otherLinks = document.querySelectorAll(".menu-item:not(#aboutMe)");
