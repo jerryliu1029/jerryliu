@@ -118,7 +118,6 @@ li {
   padding: 20px;
   display: flex;
   flex-direction: row;
-  border: 1px solid green;
 }
 
 .menu {
@@ -126,7 +125,6 @@ li {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  border: 1px solid pink;
   transition: all 0.5s ease 0s;
 }
 
@@ -139,7 +137,6 @@ li {
   opacity: 1;
   filter: blur (0px);
   transition: all 1s ease 0.1s;
-  border: 1px solid blue;
 }
 
 .icon {
@@ -240,7 +237,6 @@ li {
   display: flex;
   flex-direction: column;
   justify-content: flex-end; /* Align items to the bottom */
-  border: 1px solid teal;
 }
 
 .about-hidden {
