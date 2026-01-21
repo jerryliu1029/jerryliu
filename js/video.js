@@ -7,77 +7,57 @@
     const video = document.getElementById("bg-video");
     if (!video) return;
 
-    // Remove controls if they appear
-    video.controls = false;
-    video.removeAttribute("controls");
+    let hasStartedPlaying = false;
 
-    // Force muted for autoplay compliance
+    // Ensure video is properly configured
+    video.controls = false;
     video.muted = true;
     video.defaultMuted = true;
+    video.playsInline = true;
     video.setAttribute("muted", "");
     video.setAttribute("playsinline", "");
 
-    let hasStartedPlaying = false;
-
-    // Function to start playback
-    const startPlayback = () => {
+    // Function to attempt playback
+    const attemptPlay = () => {
       if (hasStartedPlaying) return;
 
-      video.muted = true; // Ensure muted before play
-      const playPromise = video.play();
-
-      if (playPromise !== undefined) {
-        playPromise
-          .then(() => {
-            // Successfully playing
-            if (!hasStartedPlaying) {
-              hasStartedPlaying = true;
-              video.playbackRate = PLAYBACK_RATE;
-              // Fade in after delay
-              setTimeout(() => {
-                video.style.opacity = TARGET_OPACITY;
-              }, START_DELAY_MS);
-
-              // Remove interaction listeners since we're playing
-              document.removeEventListener("touchstart", playOnInteraction);
-              document.removeEventListener("click", playOnInteraction);
-              document.removeEventListener("scroll", playOnInteraction);
-            }
-          })
-          .catch((error) => {
-            // Autoplay blocked - listeners will handle it
-            console.log("Autoplay prevented:", error.message);
-          });
-      }
+      video.muted = true; // Re-enforce muted
+      
+      video.play()
+        .then(() => {
+          console.log("Video playing successfully");
+          hasStartedPlaying = true;
+          video.playbackRate = PLAYBACK_RATE;
+          
+          // Fade in
+          setTimeout(() => {
+            video.style.opacity = TARGET_OPACITY;
+          }, START_DELAY_MS);
+          
+          // Clean up listeners
+          document.removeEventListener("touchend", attemptPlay);
+          document.removeEventListener("click", attemptPlay);
+        })
+        .catch((error) => {
+          console.log("Play failed:", error.name, error.message);
+        });
     };
 
-    // Fallback: play on any user interaction
-    const playOnInteraction = (e) => {
-      if (!hasStartedPlaying) {
-        startPlayback();
-      }
-    };
+    // Add listeners for user interaction
+    document.addEventListener("touchend", attemptPlay, { passive: true });
+    document.addEventListener("click", attemptPlay);
 
-    // Set up interaction listeners before trying autoplay
-    document.addEventListener("touchstart", playOnInteraction, {
-      passive: true,
-    });
-    document.addEventListener("click", playOnInteraction);
-    document.addEventListener("scroll", playOnInteraction, { passive: true });
-
-    // Load and try to play immediately
-    video.load();
-
-    // Small delay to ensure load has started
-    setTimeout(() => {
-      startPlayback();
-    }, 100);
+    // Try autoplay after a brief moment
+    setTimeout(attemptPlay, 50);
   }
 
-  // Try to start as early as possible
+  // Start setup
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", setupVideo);
   } else {
+    setupVideo();
+  }
+})();
     setupVideo();
   }
 })();
