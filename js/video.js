@@ -17,14 +17,15 @@
     video.setAttribute("muted", "");
     video.setAttribute("playsinline", "");
 
-    // Load the video
-    video.load();
-
     let hasStartedPlaying = false;
 
     // Function to start playback
     const startPlayback = () => {
+      if (hasStartedPlaying) return;
+
+      video.muted = true; // Ensure muted before play
       const playPromise = video.play();
+
       if (playPromise !== undefined) {
         playPromise
           .then(() => {
@@ -36,30 +37,41 @@
               setTimeout(() => {
                 video.style.opacity = TARGET_OPACITY;
               }, START_DELAY_MS);
+
+              // Remove interaction listeners since we're playing
+              document.removeEventListener("touchstart", playOnInteraction);
+              document.removeEventListener("click", playOnInteraction);
+              document.removeEventListener("scroll", playOnInteraction);
             }
           })
-          .catch(() => {
-            // Autoplay blocked - wait for interaction
+          .catch((error) => {
+            // Autoplay blocked - listeners will handle it
+            console.log("Autoplay prevented:", error.message);
           });
       }
     };
 
-    // Try to play immediately
-    startPlayback();
-
     // Fallback: play on any user interaction
-    const playOnInteraction = () => {
+    const playOnInteraction = (e) => {
       if (!hasStartedPlaying) {
-        video.load();
         startPlayback();
       }
     };
 
+    // Set up interaction listeners before trying autoplay
     document.addEventListener("touchstart", playOnInteraction, {
-      once: true,
       passive: true,
     });
-    document.addEventListener("click", playOnInteraction, { once: true });
+    document.addEventListener("click", playOnInteraction);
+    document.addEventListener("scroll", playOnInteraction, { passive: true });
+
+    // Load and try to play immediately
+    video.load();
+
+    // Small delay to ensure load has started
+    setTimeout(() => {
+      startPlayback();
+    }, 100);
   }
 
   // Try to start as early as possible
