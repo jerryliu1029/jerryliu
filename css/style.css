@@ -78,6 +78,19 @@ body {
   justify-content: center;
 }
 
+#bg-video {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.2;
+  pointer-events: none;
+  z-index: 0;
+  background-color: var(--off-black);
+  transition: opacity 3s ease-in-out;
+}
+
 .container {
   /* border: 1px solid black; */
   max-width: var(--container-max-width);
@@ -88,6 +101,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  z-index: 1;
 }
 
 /* TEXT POSITIONING */
@@ -168,7 +182,7 @@ body {
 /* Decrease Font Size for Mobile */
 @media (max-width: 600px), (max-height: 650px) {
   body {
-    font-size: 1rem;
+    font-size: 1.25 rem; /* used to be 1 rem */
   }
 }
 

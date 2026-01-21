@@ -14,6 +14,17 @@
   </head>
 
   <body>
+    <video
+      id="bg-video"
+      aria-hidden="true"
+      muted
+      playsinline
+      preload="auto"
+      style="opacity: 0"
+    >
+      <source src="assets/waves-slow-up.mp4" type="video/mp4" />
+    </video>
+
     <div class="container">
       <div class="headnav">
         <div class="navwrap left">
@@ -43,6 +54,7 @@
         Try using a larger device!
       </p>
     </div>
+    <script src="js/aspect.js"></script>
+    <script src="js/video.js"></script>
   </body>
-  <script src="js/aspect.js"></script>
 </html>
