@@ -9,10 +9,30 @@
 
     video.playbackRate = PLAYBACK_RATE;
 
-    // Ensure video plays immediately for better mobile compatibility
-    video.play().catch(() => {
-      // ignore autoplay failures
-    });
+    // Remove controls if they appear
+    video.controls = false;
+    video.removeAttribute("controls");
+
+    // Force muted for autoplay compliance
+    video.muted = true;
+    video.defaultMuted = true;
+
+    // Attempt to play
+    const playPromise = video.play();
+    if (playPromise !== undefined) {
+      playPromise.catch(() => {
+        // If autoplay fails, try playing on first user interaction
+        const playOnInteraction = () => {
+          video.play().catch(() => {});
+          document.removeEventListener("touchstart", playOnInteraction);
+          document.removeEventListener("click", playOnInteraction);
+        };
+        document.addEventListener("touchstart", playOnInteraction, {
+          once: true,
+        });
+        document.addEventListener("click", playOnInteraction, { once: true });
+      });
+    }
 
     // Fade in after delay
     setTimeout(() => {

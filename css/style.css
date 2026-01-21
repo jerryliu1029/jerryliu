@@ -91,6 +91,23 @@ body {
   transition: opacity 3s ease-in-out;
 }
 
+/* Hide video controls completely */
+#bg-video::-webkit-media-controls {
+  display: none !important;
+}
+
+#bg-video::-webkit-media-controls-enclosure {
+  display: none !important;
+}
+
+#bg-video::-webkit-media-controls-panel {
+  display: none !important;
+}
+
+#bg-video::-webkit-media-controls-play-button {
+  display: none !important;
+}
+
 .container {
   /* border: 1px solid black; */
   max-width: var(--container-max-width);
