@@ -8,17 +8,22 @@
     if (!video) return;
 
     video.playbackRate = PLAYBACK_RATE;
-    video.loop = true;
 
+    // Ensure video plays immediately for better mobile compatibility
+    video.play().catch(() => {
+      // ignore autoplay failures
+    });
+
+    // Fade in after delay
     setTimeout(() => {
       video.style.opacity = TARGET_OPACITY;
-      video.play().catch(() => {
-        // ignore autoplay failures
-      });
     }, START_DELAY_MS);
-
-    // Native loop handles continuous playback; no manual fade-out.
   }
 
-  window.addEventListener("load", setupVideo);
+  // Try to start as early as possible
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", setupVideo);
+  } else {
+    setupVideo();
+  }
 })();
