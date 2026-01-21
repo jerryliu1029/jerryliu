@@ -9,27 +9,23 @@
 
     let hasStartedPlaying = false;
 
-    // Ensure video is properly configured
+    // Configure video
     video.controls = false;
     video.muted = true;
     video.defaultMuted = true;
     video.playsInline = true;
-    video.setAttribute("muted", "");
-    video.setAttribute("playsinline", "");
 
-    // Function to attempt playback
+    // Attempt to play
     const attemptPlay = () => {
       if (hasStartedPlaying) return;
 
-      video.muted = true; // Re-enforce muted
-      
+      video.muted = true;
       video.play()
         .then(() => {
-          console.log("Video playing successfully");
+          console.log("Video playing");
           hasStartedPlaying = true;
           video.playbackRate = PLAYBACK_RATE;
           
-          // Fade in
           setTimeout(() => {
             video.style.opacity = TARGET_OPACITY;
           }, START_DELAY_MS);
@@ -37,21 +33,22 @@
           // Clean up listeners
           document.removeEventListener("touchend", attemptPlay);
           document.removeEventListener("click", attemptPlay);
+          document.removeEventListener("scroll", attemptPlay);
         })
         .catch((error) => {
-          console.log("Play failed:", error.name, error.message);
+          console.log("Autoplay prevented:", error.message);
         });
     };
 
-    // Add listeners for user interaction
+    // Add fallback listeners for interaction
     document.addEventListener("touchend", attemptPlay, { passive: true });
     document.addEventListener("click", attemptPlay);
+    document.addEventListener("scroll", attemptPlay, { passive: true, once: true });
 
-    // Try autoplay after a brief moment
-    setTimeout(attemptPlay, 50);
+    // Try to play immediately
+    attemptPlay();
   }
 
-  // Start setup
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", setupVideo);
   } else {
