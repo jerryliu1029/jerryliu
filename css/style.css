@@ -1,11 +1,26 @@
-/* Gambarino font */
-@import url("gambarino.css");
-
-/* Inter font */
 :root {
-  font-family: Inter, sans-serif;
-  font-feature-settings: "liga" 1, "calt" 1;
-  /* fix for Chrome */
+  font-family: Inter, sans-serif; /* Inter is the default font */
+  font-feature-settings:
+    "liga" 1,
+    "calt" 1; /* fix for Chrome */
+  font-size: 16px;
+  --off-white: #f8f8f8;
+  --light-grey: #c6c6c6;
+  --medium-grey: #a8a8a8;
+  --dark-grey: #525252;
+  --off-black: #020202;
+  /* Container max dimensions are dynamically set by js/aspect.js based on viewport aspect ratio */
+  --container-max-width: 500px;
+  --container-max-height: 350px;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @supports (font-variation-settings: normal) {
@@ -14,487 +29,154 @@
   }
 }
 
-/* Custom page load fade in effect */
-@keyframes blurFadeIn {
-  0% {
-    opacity: 0;
-    filter: blur(10px);
-  }
-  100% {
-    opacity: 1;
-    filter: blur(0);
-  }
-}
-
-.blur-fade-in {
-  animation: blurFadeIn 3s ease;
-}
-
-/* Global things (mostly) */
-
-:root {
-  --off-white: #f8f8f8;
-  --off-black: #020202;
-  --light-blue: #68e3ff;
-}
-
 ::selection {
-  background-color: var(
-    --light-blue
-  ); /* Change this to your desired highlight color */
-  color: black; /* Optional: Change the text color */
+  background-color: var(--off-white);
+  color: var(--off-black);
 }
 
-/* Define for all elements */
+.link {
+  text-decoration: none; /* Remove underline */
+  color: inherit; /* Inherit color from parent */
+  font-family: inherit; /* Inherit font family from parent */
+  font-size: inherit; /* Inherit font size from parent */
+  transition: color 500ms ease-in-out; /* Smooth fade on hover */
+}
+
+.link:hover {
+  color: var(--medium-grey);
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-html {
+html,
+body {
   height: 100%;
   width: 100%;
-  margin: 0; /* Remove default margin */
-  padding: 0; /* Remove default padding */
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
 }
 
 body {
-  font-family: Gambarino-Regular;
-  font-size: 75px;
-  line-height: 130%;
+  background-color: var(--off-black);
+  padding: 50px;
+  font-family:
+    Inter Variable,
+    sans-serif;
+  font-weight: 750;
+  font-size: 1.25rem;
+  font-optical-sizing: auto;
+  letter-spacing: -0.05rem;
   color: var(--off-white);
-  background: var(--off-black);
-  display: flex; /* Use flexbox */
-  justify-content: center; /* Center horizontally */
-  align-items: center; /* Center vertically */
-  height: 100%; /* Full height of the viewport */
-  width: 100%;
-  margin: 0; /* Remove default margin */
-  padding: 0; /* Remove default padding */
-  overflow: hidden;
-  cursor: none; /* Hide default cursor */
-}
-
-/* Paragraph */
-p {
-  font-family: Inter, sans-serif;
-  font-size: 18px;
-  font-weight: 200;
-  line-height: 130%;
-}
-
-/* Links (anchor) */
-a {
-  text-decoration: none;
-  color: inherit;
-  transition: filter 0.5s ease-out; /* Add transition for filter change */
-}
-
-a:hover {
-  filter: blur(2px); /* Apply blur effect on hover */
-  cursor: none; /* Hide default cursor on hover */
-}
-
-/* Unordered lists */
-ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-/* List items */
-li {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-/* Utility Classes */
-
-.container-wrap {
+  /* below makes body a flex container to center .container */
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  /* border: 1px solid white; */
 }
 
 .container {
-  width: auto;
-  height: 400px;
-  /* padding: 20px; */
-  display: flex;
-  flex-direction: row;
-  /* border: 1px solid red; */
-}
-
-.menu {
-  width: 411.31px;
-  height: fit-content;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  transition: all 0.5s ease 0s;
-  /* border: 1px solid lightblue; */
-}
-
-.menu-item {
+  /* border: 1px solid black; */
+  max-width: var(--container-max-width);
+  max-height: var(--container-max-height);
+  height: 100%;
+  width: 100%;
   position: relative;
-  right: 50%;
-  transform: translateX(50%);
-  margin-right: 0px;
-  visibility: visible;
-  opacity: 1;
-  filter: blur (0px);
-  transition: all 1s ease 0.1s;
-  /* border: 1px solid teal; */
-}
-
-.icon {
-  scale: 0.85;
-  /* border: 1px solid limegreen; */
-}
-
-.arrow {
-  visibility: hidden;
-  opacity: 0;
-  filter: blur (10px);
-  transition: all 1s ease 0s;
-  /* border: 1px solid pink; */
-}
-
-/* Defining states for the "socials" and "about me" sections */
-
-.arrow-socials {
-  visibility: hidden;
-  /* just a blank here, placeholder for responsive elements later */
-}
-
-.arrow-about {
-  visibility: hidden;
-  /* just a blank here, placeholder for responsive elements later */
-}
-
-.menu-socials {
-  /* just a blank here, placeholder for responsive elements later */
-  display: flex;
-}
-
-.menu-about {
-  /* just a blank here, placeholder for responsive elements later */
-  display: flex;
-}
-
-/* same as the menu-item-shifted-about normally but needs to be separate for responsive design */
-.menu-item-shifted-socials {
-  right: 0%;
-  transform: translateX(0%);
-  margin-right: 50px;
-  visibility: visible;
-  opacity: 1;
-  filter: blur (0px);
-  transition: all 1s ease 0s;
-}
-
-/* same as the menu-item-shifted-socials normally but needs to be separate for responsive design */
-.menu-item-shifted-about {
-  right: 0%;
-  transform: translateX(0%);
-  margin-right: 50px;
-  visibility: visible;
-  opacity: 1;
-  filter: blur (0px);
-  transition: all 1s ease 0s;
-}
-
-.disabled-link {
-  pointer-events: none;
-  opacity: 0.05;
-}
-
-/* Defining states for the "socials" section */
-
-.container-socials {
-  align-items: stretch;
-}
-
-.socials-hidden {
-  visibility: hidden;
-  opacity: 0;
-  filter: blur(10px);
-  width: 0;
-  transition: visibility 1s ease-in 0.5s, opacity 0.5s ease-in,
-    filter 0.5s ease-in, width 0.5s ease-in 0.5s, margin-left 0.5s linear;
-}
-
-.socials-visible {
-  visibility: visible;
-  opacity: 1;
-  filter: blur(0);
-  width: 70px;
-  margin-left: 50px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  transition: visibility 1s ease, opacity 0.5s ease 0.5s, filter 0.5s ease 0.5s,
-    width 0.5s ease, margin-left 0.5s ease;
+  justify-content: space-between;
 }
 
-/* Defining states for the "about me" section */
+/* TEXT POSITIONING */
 
-.container-about {
-  align-items: stretch;
-}
-
-#about-text {
+.headnav {
+  /* border: 1px solid orange; */
   display: flex;
-  flex-direction: column;
-  justify-content: flex-end; /* Align items to the bottom */
+  justify-content: flex-start;
+  opacity: 0;
+  animation: fade-in 2s ease-out 1s forwards;
+}
+
+.linknav {
   /* border: 1px solid green; */
-}
-
-.about-hidden {
-  visibility: hidden;
+  display: flex;
+  justify-content: flex-end;
   opacity: 0;
-  filter: blur(10px);
-  width: 0;
-  transition: visibility 1s ease-in 0.5s, opacity 0.5s ease-in,
-    filter 0.5s ease-in, width 0.5s ease-in 0.5s, margin-left 0.5s linear,
-    margin-right 0.5s ease;
+  animation: fade-in 2s ease-out 2s forwards;
 }
 
-.about-visible {
-  visibility: visible;
-  opacity: 1;
-  filter: blur(0);
-  width: 500px;
-  margin-left: 50px;
-  transition: visibility 1s ease, opacity 0.5s ease 0.5s, filter 0.5s ease 0.5s,
-    width 0.5s ease, margin-left 0.5s ease, margin-right 0.5s ease;
+@media (prefers-reduced-motion: reduce) {
+  .headnav,
+  .linknav {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
 }
 
-.text-block {
-  height: fit-content;
-  padding-bottom: 15px;
-  /* border: 1px solid hotpink; */
+.navwrap {
+  /* border: 1px solid purple; */
+  width: 30%;
 }
 
-/* Custom cursor stuff */
+.navwrap.left {
+  text-align: left;
+}
 
-.custom-cursor {
+.navwrap.right {
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+#jerryliu br {
+  margin: 0.05rem 0;
+}
+
+/* WARNING */
+
+.warning {
+  visibility: hidden;
   position: absolute;
-  width: 32px;
-  height: 32px;
-  background: white;
-  clip-path: inset(15% round 50%);
-  pointer-events: none;
-  mix-blend-mode: difference; /* Invert colors */
-  z-index: 1000;
-  transform: translate(-50%, -50%);
-  transition: clip-path 0.5s ease;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  color: var(--off-white);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.custom-cursor.link-hover {
-  clip-path: inset(0% round 50%);
-  transition: clip-path 0.5s ease;
-}
+/* MEDIA QUERIES */
 
-.custom-cursor.rect {
-  clip-path: inset(4px 14px 4px 14px round 0%);
-  transition: clip-path 0.5s ease;
-}
+/* @media (max-width: 1120px) {
+} */
 
-/* Touscreen modifications */
+/* @media (max-width: 750px) {
+} */
 
-body.touchscreen #customCursor {
-  display: none; /* Hide custom cursor on touchscreen devices */
-}
-
-body.no-touchscreen #customCursor {
-  display: block; /* Show custom cursor on non-touchscreen devices */
-}
-
-/* Disable hover effect on touchscreen devices */
-body.touchscreen a:hover {
-  filter: none; /* Remove blur effect */
-}
-
-/*
-
-width x height
-ipad portrait 850 x 1056; 820 x 1073
-ipad landscape 1180 x 696; 1180 x 713
-
-*/
-
-/* Media queries */
-
-/* Changing the AboutMe to an overlay */
-@media (max-width: 1120px) {
-  /* body {
-    background-color: red;
-  } */
-
-  .menu-about {
-    width: 0px;
-    transition: all 0.5s ease 0.5s;
-  }
-
-  .menu-item-shifted-about {
-    /* override the default */
-    right: 0%;
-    transform: translateX(0%);
-    margin-right: 0px;
-    /* new additions */
-    visibility: hidden;
-    opacity: 0;
-    filter: blur(10px);
-    transition: all 1s ease 0s;
-  }
-
-  .about-visible {
-    margin-left: 0px;
-  }
-
-  #emojis {
-    text-align: center;
-  }
-
-  .arrow-about {
-    visibility: visible;
-    opacity: 1;
-    filter: blur(0);
-    transition: all 1s ease 0.5s;
-  }
-}
-
-/* Changing the Socials to an overlay */
-@media (max-width: 750px) {
-  /* body {
-    background-color: yellow;
-  } */
-
-  .menu-socials {
-    width: 0px;
-    transition: all 0.5s ease 0.5s;
-  }
-
-  .menu-item-shifted-socials {
-    /* override the default */
-    right: 0%;
-    transform: translateX(0%);
-    margin-right: 0px;
-    /* new additions */
-    visibility: hidden;
-    opacity: 0;
-    filter: blur(10px);
-    transition: all 1s ease 0s;
-  }
-
-  .container {
-    align-items: center;
-  }
-
-  .container-about {
-    align-items: center;
-  }
-
-  .container-socials {
-    align-items: center;
-  }
-
-  .socials-visible {
-    margin-left: 0px;
-  }
-
-  .arrow-socials {
-    visibility: visible;
-    opacity: 1;
-    filter: blur(0);
-    transition: all 1s ease 0.5s;
-  }
-}
-
-/* Scaling text */
+/* Decrease Font Size for Mobile */
 @media (max-width: 600px), (max-height: 650px) {
-  html {
-    height: 100%;
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    /* border: 1px dotted green; */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
   body {
-    /* background-color: lightgreen; */
-    height: 100%;
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    font-size: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    /* border: 1px solid yellow; */
+    font-size: 1rem;
   }
+}
 
-  p {
-    font-size: clamp(5px, 3.6vw, 16px); /* Responsive font size */
-    text-overflow: ellipsis; /* Add ellipsis for overflowing text */
+/* Too Small To Display */
+@media (max-width: 250px), (max-height: 350px) {
+  body {
+    background-color: var(--off-black);
   }
-
-  .container-wrap {
-    display: flex;
-    height: 100%;
-    align-items: center;
-    justify-content: center;
-  }
-
   .container {
-    height: 350px;
-    align-items: center;
-    justify-content: center;
-    /* height: 270px; */
-    /* padding: 10px; */
+    display: none;
   }
-
-  .menu {
-    width: 275px;
-  }
-
-  .menu-about {
-    width: 0px;
-    transition: all 0.5s ease 0.5s;
-  }
-
-  .menu-socials {
-    width: 0px;
-    transition: all 0.5s ease 0.5s;
-  }
-
-  /* socials icon hidden has padding right? */
-
-  .text-block {
-    height: 350px;
-  }
-
-  #copy-text {
-    height: 273px;
-    /* border: 1px solid yellowgreen; */
-  }
-
-  .about-visible {
-    width: calc(100vw - 100px);
-    max-width: 400px;
-    margin-left: 20px;
-    margin-right: 20px;
-  }
-
-  .arrow {
-    scale: 0.6;
+  .warning {
+    visibility: visible;
   }
 }
