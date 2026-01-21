@@ -1,6 +1,6 @@
 (() => {
   const START_DELAY_MS = 5000;
-  const TARGET_OPACITY = 0.2;
+  const TARGET_OPACITY = 0.4;
   const PLAYBACK_RATE = 0.5;
 
   function setupVideo() {
